@@ -5,10 +5,24 @@ A simple shell built in C.
 ```
 git clone https://github.com/low_level_shell
 cd low_level_shell
-make install
-./shell
+make
+./Bin/shell
 
+```
+#### To clean it up
+```
+make clear
 ```
 
 ## Configuration
-You can configure your prompt by going to `shell.h` file and changing `PROMPT` macro.
+You can configure your prompt by going to `[cmdPrompt](cmdPrompt.c)` file and changing `prompt` variable.
+
+## Builtin Commands
+
+we only have two builtin commands
+- **exit**
+- **env**
+
+## Special Characters
+In the future we gonna add support to special characters
+
