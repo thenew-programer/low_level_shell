@@ -15,7 +15,7 @@ make clear
 ```
 
 ## Configuration
-You can configure your prompt by going to `[cmdPrompt](cmdPrompt.c)` file and changing `prompt` variable.
+You can configure your prompt by going to [cmdPrompt](./src/cmdPrompt.c) file and changing `prompt` variable.
 
 ## Builtin Commands
 
