@@ -1,4 +1,4 @@
-# Low Level Shell
+# Low Level Shell (LLC)
 A simple shell built in C.
 ## Install
 
