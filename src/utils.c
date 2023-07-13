@@ -1,86 +1,110 @@
-#include "shell.h"
+#include "main.h"
 
 /**
-* free2D - free a 2d array
-* @arr: pointer to a 2d array
-* Return: nothing.
+ * _strlen_input - function that count the len of input given by
+ * the user.
+ * @str: pointer to string containing the input
+ * Return: length of input.
 */
 
-void free2D(char **arr)
+int _strlen_input(char *str)
 {
-	int i;
+	int len = 0;
 
-	for (i = 0; arr[i]; i++)
-		free(arr[i]);
-	free(arr);
-}
-
-
-/**
-* exiting - builtin function for exit
-* Return: nothing
-*/
-void exiting(void)
-{
-	exit(0);
-}
-
-/**
-* env - builtin function for env function.
-* Description: prints out all the environment vars
-* Return: nothing
-*/
-void env(void)
-{
-	int i = 0;
-
-	while (__environ[i])
+	while (*str != 10)
 	{
-		printf("%s\n", __environ[i]);
-		i++;
+		len++;
+		str++;
 	}
+	return (len);
+}
+
+/**
+ * _strlen - implementation of the strlen
+ * @str: pointer to string
+ * Return: length of string.
+*/
+
+int _strlen(char *str)
+{
+	int len = 0;
+
+	while (*str != 0)
+	{
+		len++;
+		str++;
+	}
+	return (len);
 }
 
 /**
 * _write_err - replace printf
-* @str: pointer to str
+* @shell: shell name
+* @err: the err
+* @cmd: the command
 * Return: nothing
 */
 
-void _write_err(char *str)
+void _write_err(char *shell, char *err, char *cmd)
 {
-	write(STDERR_FILENO, str, _strlen(str));
-	write(STDERR_FILENO, ": No such file or directory\n", 28);
+	write(STDERR_FILENO, shell, _strlen(shell));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, err, _strlen(err));
+	write(STDERR_FILENO, cmd, _strlen(cmd));
+	write(STDERR_FILENO, "\n", 1);
 }
 
 /**
-* _strcat - replace strcat from <string.h>
-* @dest: destination string
-* @src: source string
+* _strcat - implementation of strcat from <string.h>
+* @s1: string
+* @s2: string
 * Return: pointer to string
 */
 
-char *_strcat(char *dest, char *src)
+char *_strcat(char *s1, char *s2)
 {
-	int i, j;
+	char *cmd;
+	int j = _strlen(s1);
+	int i = _strlen(s2);
 
-	i = 0;
-	while (dest[i] != 0)
-		i++;
-	while (src[j] != 0)
-		j++;
-
-	dest = realloc(dest, (i + j + 2) * sizeof(char));
-	if (!dest)
+	cmd = malloc((i + j + 2) * sizeof(char));
+	if (!cmd)
 		return (NULL);
 
-	j = 0;
-	dest[i++] = '/';
-	while (src[j] != 0)
+	i = 0;
+	while (s2[i] != 0)
 	{
-		dest[i] = src[j];
-		j++, i++;
+		cmd[i] = s2[i];
+		i++;
 	}
-	dest[i] = 0;
-	return (dest);
+	cmd[i++] = '/';
+	j = 0;
+	while (s1[j] != 0)
+	{
+		cmd[i] = s1[j];
+		i++, j++;
+	}
+	cmd[i] = 0;
+	return (cmd);
+}
+
+/**
+ * get_tokens_count - count the length of tokens in
+ * a string seperated by spaces or tabs
+ * @input: the string
+ * @delimiter: in most cases spaces
+ * Return: numbers of tokens
+*/
+int get_tokens_count(char *input, char *delimiter)
+{
+	int count = 1;
+	char *tmp_str;
+
+	tmp_str = input;
+	while (*tmp_str != 0)
+	{
+		if (delimiter[0] == *(tmp_str++) || delimiter[1] == *(tmp_str++))
+			count++;
+	}
+	return (count++);
 }
