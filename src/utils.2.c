@@ -19,7 +19,7 @@ void _free(int count, ...)
 	va_start(args, count);
 	for (i = 0; i < count; i++)
 	{
-		ptr = va_arg(args, char *);
+		*ptr = va_arg(args, char *);
 		free(ptr);
 	}
 	va_end(args);
