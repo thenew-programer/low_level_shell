@@ -1,10 +1,10 @@
 CC = gcc
-CFLAGS =   -Wall -Werror -Wextra -pedantic -std=gnu89 -Wunused-variable -I./$(INCLUDE_DIR) 
+CFLAGS =  -Wall -Werror -Wextra -pedantic -std=gnu89 -Wunused-variable -I./$(INCLUDE_DIR)
 LDFLAGS = 
 
 
 SRC_DIR = src
-INCLUDE_DIR = src/include
+INCLUDE_DIR = $(SRC_DIR)/include
 BUILD_DIR = Build
 BINARY_DIR = Bin
 
@@ -36,6 +36,6 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 clear: 
 	@echo 'cleaning...'
-	@rm -rf $(BUILD_DIR) $(BINARY_DIR)
+	@rm -rfv $(BUILD_DIR) $(BINARY_DIR)
 
 .PHONY: all clean
