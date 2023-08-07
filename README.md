@@ -15,7 +15,7 @@ make clear
 ```
 
 ## Configuration
-You can configure your prompt by clicking on this [get_input](./src/get_input) file and changing the argument given to `readline` variable.
+You can configure your prompt by clicking on this [main](./src/main.c) file and changing the argument given to `readline` variable, in the `23th line`.
 
 ## Builtin Commands
 
