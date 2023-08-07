@@ -19,7 +19,7 @@ void _free(int count, ...)
 	va_start(args, count);
 	for (i = 0; i < count; i++)
 	{
-		*ptr = va_arg(args, char *);
+		ptr = va_arg(args, char *);
 		free(ptr);
 	}
 	va_end(args);
@@ -48,4 +48,22 @@ void _env_(void)
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		i++;
 	}
+}
+
+/**
+ * readline - this function read a line for stdin
+ * it will replace the readline function for editline lib
+ * in the case of windows
+ * @prompt: the string the user sees when he's typint a command
+ * Return: address of input
+ */
+
+char* readline() {
+	static char buffer[2048];
+	char* cpy;
+	fgets(buffer, 2048, stdin);
+	cpy = malloc(strlen(buffer)+1);
+	strcpy(cpy, buffer);
+	cpy[strlen(cpy)-1] = '\0';
+	return cpy;
 }
