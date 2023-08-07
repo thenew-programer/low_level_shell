@@ -7,19 +7,25 @@
 * Return: 0 on success.
 */
 
+
+
 int main(int __attribute((unused)) argc, char **argv)
 {
 	char *input, **tokens, *cmd;
+	/* Print Version and Exit Information */
+	puts("Low Level Shell Version 0.0.0.1.4");
+	puts("Press Ctrl+c to Exit\n\n\n");
+
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "-> ", 3);
+			prompt("-> ");
 		input = get_input();
 		if (!input)
 			continue;
 		tokens = tokenize(input);
-		if (builtin(tokens, input) == 0)
+		if (builtin(tokens, input) == 1)
 		{
 			_free(2, input, tokens);
 			continue;
@@ -31,7 +37,10 @@ int main(int __attribute((unused)) argc, char **argv)
 			_free(2, input, tokens);
 			continue;
 		}
-		execute(tokens, cmd);
+		if (execute(tokens, cmd) == -100)
+		{
+			_write_err(argv[0], "An error occurred while executing -> ", tokens[0]);
+		}
 		_free(3, input, tokens, cmd);
 	}
 	return (0);
