@@ -15,11 +15,12 @@ make clear
 ```
 
 ## Configuration
-You can configure your prompt by going to [get_input](./src/get_input) file and changing the argument given to `readline` variable.
+You can configure your prompt by clicking on this [get_input](./src/get_input) file and changing the argument given to `readline` variable.
 
 ## Builtin Commands
 
 we only have two builtin commands
-- **exit**
-- **env**
+- **cd :** change directory
+- **env :** print environment variables
+- **exit :** exit the low_level_shell
 
