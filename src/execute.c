@@ -18,10 +18,7 @@ int execute(char **argv, char *full_cmd)
 	if (child_pid == 0)
 	{
 		if (execve(full_cmd, argv, environ) == -1)
-		{
-			_write_err(argv[0], "An error occurred while executing -> ", argv[0]);
 			return (-100);
-		}
 		else
 			return (1);
 
