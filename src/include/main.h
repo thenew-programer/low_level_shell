@@ -46,6 +46,8 @@ void prompt(char *);
 
 /* Utility functions*/
 char* readline();
+char *tokenize_prompt(char *path);
+void handle_signal();
 int _strlen(char *str);
 int _strlen_input(char *str);
 int get_tokens_count(char *input, char *delimiter);

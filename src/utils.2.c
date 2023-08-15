@@ -20,7 +20,8 @@ void _free(int count, ...)
 	for (i = 0; i < count; i++)
 	{
 		ptr = va_arg(args, char *);
-		free(ptr);
+		if (ptr)
+			free(ptr);
 	}
 	va_end(args);
 

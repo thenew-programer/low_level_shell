@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
 * main - function that execute the commands.
@@ -8,19 +9,24 @@
 */
 
 
+char *input, **tokens, *cmd;
 
 int main(int __attribute((unused)) argc, char **argv)
 {
-	char *input, **tokens, *cmd;
+	if (argc != 1) {
+		perror("Low Level Shell: Don't provide any argument.");
+		exit(-1);
+	}
 	/* Print Version and Exit Information */
 	puts("Low Level Shell Version 0.0.0.1.4");
 	puts("Press Ctrl+c to Exit\n\n\n");
+	signal(SIGINT, handle_signal);
 
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
-			prompt("-> ");
+			prompt("⚡->");
 		input = get_input();
 		if (!input)
 			continue;
@@ -44,4 +50,9 @@ int main(int __attribute((unused)) argc, char **argv)
 		_free(3, input, tokens, cmd);
 	}
 	return (0);
+}
+
+void handle_signal() {
+	_free(3, tokens, input, cmd);
+	exit(-1);
 }
