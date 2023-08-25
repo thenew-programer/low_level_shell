@@ -25,6 +25,7 @@ int builtin(char **args, char *input) {
     if (strcmp(builtin[i].cmd, args[0]) == 0) {
       if (strcmp(builtin[i].cmd, "exit") == 0) {
         _free(2, args, input);
+		exit(EXIT_SUCCESS);
       } else if (strcmp(builtin[i].cmd, "cd") == 0) {
         if (args[1] == NULL) {
           _chdir_("/home/jos");
