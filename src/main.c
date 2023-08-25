@@ -11,15 +11,18 @@
 
 char *input, **tokens, *cmd;
 
-int main(int __attribute((unused)) argc, char **argv)
+int main(int argc, char **argv)
 {
+	(void)argc;
 	if (argc != 1) {
-		perror("Low Level Shell: Don't provide any argument.");
-		exit(-1);
+		perror("Low Level Shell: We don't accept arguments here");
+		exit(EXIT_FAILURE);
 	}
 	/* Print Version and Exit Information */
-	puts("Low Level Shell Version 0.0.0.1.4");
-	puts("Press Ctrl+c to Exit\n\n\n");
+	puts("			+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- -- ---+");
+	puts("			|			Low Level Shell Version 0.0.0.1.4			 |");
+	puts("			+--------------------------------------------------------+");
+	puts("\n\n\n");
 	signal(SIGINT, handle_signal);
 
 
@@ -52,7 +55,10 @@ int main(int __attribute((unused)) argc, char **argv)
 	return (0);
 }
 
-void handle_signal() {
-	_free(3, tokens, input, cmd);
-	exit(-1);
+void handle_signal(int signum) {
+	if (signum == SIGINT) {
+		putchar('\n');
+		prompt("⚡->");
+		fflush(stdout);
+	}
 }
