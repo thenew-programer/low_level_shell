@@ -20,7 +20,7 @@ BINARY = shell
 
 
 
-all: $(BINARY)
+install: $(BINARY)
 	@echo 'Compiled Successfully'
 
 $(BINARY): $(OBJECT)
@@ -34,8 +34,8 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(BUILD_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-clear: 
+clean: 
 	@echo 'cleaning...'
 	@rm -rfv $(BUILD_DIR) $(BINARY_DIR)
 
-.PHONY: all clean
+.PHONY: install clean
