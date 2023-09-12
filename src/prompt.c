@@ -6,16 +6,16 @@
  * Return: nothing
  */
 
-void prompt(char *prompt) {
+void prompt(char *prompt1, char *prompt2) {
   char pwd[2048];
   char *last_dir;
   char HOME_PATH[] = "jos";
   getcwd(pwd, 2048);
   last_dir = tokenize_prompt(pwd);
   if (strcmp(last_dir, HOME_PATH) == 0) {
-    printf(YELLOW "~" CYAN " %s " RESET, prompt);
+    printf(YELLOW "%s" GREEN "%s" CYAN " ~ " RESET, prompt1, prompt2);
   } else {
-    printf(YELLOW "%s" CYAN " %s " RESET, prompt, last_dir);
+    printf(YELLOW "%s" GREEN "%s" CYAN " %s " RESET, prompt1, prompt2, last_dir);
   }
 }
 
